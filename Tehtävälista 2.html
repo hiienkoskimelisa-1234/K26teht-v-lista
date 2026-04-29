@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tehtävälista</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #f1c2db;
+            text-align: center;
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        /* laatikko */
+        .box {
+            background: white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* input */
+        input {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+        }
+
+        /* nappi */
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            background: #ebebeb;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tehtävälista</h1>
+
+    <input type="text" id="taskInput">
+    <button onclick="addTask()">Lisää</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = []; // taulukko
+
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let text = input.value;
+
+            if (text === "") return;
+
+            tasks.push(text); // lisää taulukkoon
+            input.value = "";
+
+            showTasks();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1); // poista taulukosta
+            showTasks();
+        }
+
+        function showTasks() {
+            let list = document.getElementById("taskList");
+            list.innerHTML = "";
+
+            // silmukka
+            for (let i = 0; i < tasks.length; i++) {
+                list.innerHTML +=
+                    "<li>" +
+                    tasks[i] +
+                    " <button onclick='deleteTask(" + i + ")'>Poista</button>" +
+                    "</li>";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
